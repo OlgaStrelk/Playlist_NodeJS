@@ -7,13 +7,20 @@ const { PORT = 3000 } = process.env;
 
 const server = http.createServer((req, res) => {
   const dataPath = path.join(__dirname, "data.json");
-  res.writeHead(200, {
-    "Content-Type": "text/html",
+
+  fs.readFile(dataPath, { encoding: "utf8" }, (err, data) => {
+    if (err) {
+      return console.log(err);
+    }
+
+    res.writeHead(200, {
+      "Content-Type": "text/html",
+    });
+
+    const markup = generateMainView([]);
+
+    res.end(markup);
   });
-
-  const markup = generateMainView([]);
-
-  res.end(markup);
 });
 
 server.listen(PORT);
