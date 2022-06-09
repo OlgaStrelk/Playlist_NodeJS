@@ -1,11 +1,11 @@
-const generateSongMarkup = song => `
+const generateSongMarkup = (song) => `
   <div class="song">
     <p class="song__title">${song.title}</p>
     <p class="song__artist">${song.artist}</p>
   </div>
 `;
 
-const generateMainView = songs => `
+const generateMainView = (songs) => `
   <!DOCTYPE html>
   <html>
   <head>
@@ -87,12 +87,12 @@ const generateMainView = songs => `
       <div class="cover">
         <div class="cover__image"></div>
         <div class="cover__info">
-          <p class="cover__count">${0} треков</p>
+          <p class="cover__count">${songs.length} треков</p>
           <h1 class="cover__title">Плейлист для работы</h1>
         </div>
       </div>
       <div class="songs-container">
-        ${'Здесь будут треки'}
+        ${songs.map(generateSongMarkup).join("")}
       </div>
     </main>
   </body>
@@ -100,5 +100,5 @@ const generateMainView = songs => `
 `;
 
 module.exports = {
-  generateMainView
+  generateMainView,
 };
